@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="nav">
+      <img class="logo" src="./logo.svg" alt="cc" />
+      <img
+        id="history-icon"
+        onclick="goHistory()"
+        src="./historyIcon.svg"
+        alt=""
+      />
+      <img id="cancel-icon" onclick="goConvert()" src="./cancel.svg" alt="" />
+    </div>
+    <div class="container">
+      <div id="conversion-card">
+        <div id="result-bold"><div id="result-bold-inner">0.00</div></div>
+        <div class="conversion-board">
+          <div class="user-input">
+            <input
+              id="amount"
+              oninput="conversionHandler()"
+              type="number"
+              value="0"
+            />
+            <input id="result-small" type="number" value="0" readonly />
+          </div>
+          <div class="currency-selectors">
+            <select id="source" name="source" oninput="conversionHandler()">
+              <option value="EUR" selected>🇪🇺&emsp;EUR&emsp;💶</option>
+              <option value="USD">🇺🇸&emsp;USD&emsp;💵</option>
+              <option value="JPY">🇯🇵&emsp;JPY&emsp;💴</option>
+            </select>
+            <select id="target" name="target" oninput="conversionHandler()">
+              <option value="EUR">🇪🇺&emsp;EUR&emsp;💶</option>
+              <option value="USD" selected>🇺🇸&emsp;USD&emsp;💵</option>
+              <option value="JPY">🇯🇵&emsp;JPY&emsp;💴</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="history-card">
+        <span id="history">
+          <div class="historyDisplay">
+            <h3>Conversion History</h3>
+            <div class="column">
+              <div class="column-name">From</div>
+              <div class="column-name">To</div>
+              <div class="column-name">Input</div>
+              <div class="column-name">Result</div>
+            </div>
+            <div id="listElem"></div>
+            <div id="emptyList"></div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <!-- Use the `axios` library for making Ajax requests. -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/idb@3.0.2/build/idb.min.js"></script>
+    <!-- Put your own JavaScript into this file. -->
+    <script src="scripts/store.js"></script>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>
