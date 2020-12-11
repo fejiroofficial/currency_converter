@@ -129,7 +129,7 @@ select[name="target"] {
   font-weight: bold;
 }
 
-#emptyList {
+#empty-list {
   display: flex;
   justify-content: center;
   align-items: center;

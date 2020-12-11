@@ -4,16 +4,16 @@ async function init() {
   db = await idb.openDb("converterDb", 1, (db) => {
     db.createObjectStore("conversions", { autoIncrement: true });
   });
-  list();
+  fetchHistory();
 }
 
-async function list() {
+async function fetchHistory() {
   let tx = db.transaction("conversions");
   let store = tx.objectStore("conversions");
 
   let conversions = await store.getAll();
-  const listElem = document.getElementById("listElem");
-  const emptyElem = document.getElementById("emptyList");
+  const listElem = document.getElementById("list-elem");
+  const emptyElem = document.getElementById("empty-list");
 
   if (conversions.length) {
     listElem.innerHTML = conversions
@@ -28,8 +28,6 @@ async function list() {
         `
       )
       .join("");
-  } else {
-    emptyElem.innerHTML = "<div class='empty-history'>*Conversion history is empty for now.</div>";
   }
 }
 
@@ -45,7 +43,7 @@ async function addConversionToStore(
     await tx
       .objectStore("conversions")
       .add({ sourceCurrency, targetCurrency, amount, result });
-    await list();
+    await fetchHistory();
   } catch (err) {
     if (err.name == "ConstraintError") {
       alert("conversion exists already");

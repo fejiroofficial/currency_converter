@@ -19,9 +19,7 @@ const fetchRate = async () => {
 
 const saveInputAndResult = async (inputResult) => {
   const data = await inputResult;
-  const sourceCurrency = data.sourceCurrency;
-  const targetCurrency = data.targetCurrency;
-  const amount = data.amount;
+  const { sourceCurrency, targetCurrency, amount } = data;
   const result = data.result || 0;
   if (result) {
     addConversionToStore(sourceCurrency, targetCurrency, amount, result);
@@ -64,6 +62,7 @@ const goHistory = () => {
   historyCard.style.display = "block";
   historyBtn.style.display = "none";
   convertBtn.style.display = "block";
+  fetchHistory();
 };
 
 const goConvert = () => {
