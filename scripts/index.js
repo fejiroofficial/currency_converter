@@ -12,8 +12,8 @@ const fetchRate = async () => {
       `https://data.fixer.io/api/convert?access_key=${API_KEY}&from=${sourceCurrency}&to=${targetCurrency}&amount=${amount}`
     );
     return { sourceCurrency, targetCurrency, amount, result };
-  } catch (error) {
-    alert("error found try again");
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -50,27 +50,26 @@ const runConversionModule = () => {
 
 const debounce = (func, wait = 100) => {
   let timeout;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       func.apply(this, args);
     }, wait);
   };
-}
-
+};
 
 const debouncedConversion = debounce(runConversionModule, 1000);
 
-const conversionHandler = () => {
-  debouncedConversion()
-};
+function conversionHandler() {
+  debouncedConversion();
+}
 
 const conversionCard = document.getElementById("conversion-card");
 const historyCard = document.getElementById("history-card");
 const historyBtn = document.getElementById("history-icon");
 const convertBtn = document.getElementById("cancel-icon");
 
-const goHistory = () => {
+function goHistory() {
   conversionCard.style.display = "none";
   historyCard.style.display = "block";
   historyBtn.style.display = "none";
@@ -78,7 +77,7 @@ const goHistory = () => {
   fetchHistory();
 };
 
-const goConvert = () => {
+function goConvert() {
   conversionCard.style.display = "grid";
   historyCard.style.display = "none";
   historyBtn.style.display = "block";

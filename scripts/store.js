@@ -13,7 +13,6 @@ async function fetchHistory() {
 
   let conversions = await store.getAll();
   const listElem = document.getElementById("list-elem");
-  const emptyElem = document.getElementById("empty-list");
 
   if (conversions.length) {
     listElem.innerHTML = conversions
