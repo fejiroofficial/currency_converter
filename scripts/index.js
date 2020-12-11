@@ -48,8 +48,21 @@ const runConversionModule = () => {
   );
 };
 
+const debounce = (func, wait = 100) => {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}
+
+
+const debouncedConversion = debounce(runConversionModule, 1000);
+
 const conversionHandler = () => {
-  runConversionModule();
+  debouncedConversion()
 };
 
 const conversionCard = document.getElementById("conversion-card");
